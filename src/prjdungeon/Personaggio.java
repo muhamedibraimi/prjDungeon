@@ -29,6 +29,26 @@ public class Personaggio {
     public int getAtk() {
         return atk;
     }
+
+    public int getMaxHp() {
+        return maxHp;
+    }
+
+    public void setAtk(int atk) {
+        this.atk = atk;
+    }
+
+    public void setDef(int def) {
+        this.def = def;
+    }
+
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
+    public void setMaxHp(int maxHp) {
+        this.maxHp = maxHp;
+    }
     
     public Personaggio(String nome, int[] pos, int atk, int def, int hp, int maxHp, double range) {
         this.nome = nome;
@@ -50,7 +70,7 @@ public class Personaggio {
         pos[0]+=x;
         pos[1]+=y;
     }
-    private boolean isVivo(){
+    public boolean isVivo(){
         boolean vivo=false;
         if(hp>0){
             vivo=true;
