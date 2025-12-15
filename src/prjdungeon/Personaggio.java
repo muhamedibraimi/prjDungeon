@@ -11,35 +11,62 @@ package prjdungeon;
  */
 public class Personaggio {
     private String nome;
-    private int hp,atk,def;
+    private int[]pos;
+    private int atk;
+    private int def;
+    private int hp;
+    private int maxHp;
     private double range;
-    private int[] pos;
-    
-    public Personaggio(String nome, int hp,int atk,int def, int[] pos, double range){
-       this.nome= nome;
-       this.hp=hp;
-       this.atk= atk;
-       this.def=def;
-       for(int i = 0; i<pos.length;i++){
-        this.pos[i]=pos[i];   
-       }
-       this.range=range;
+
+    public int getDef() {
+        return def;
     }
-    private boolean isVivo(){
-        boolean vivo = true;
-        if(hp<=0){
-            vivo = false;
-        }
-       return vivo;
+
+    public int getHp() {
+        return hp;
+    }
+
+    public int getAtk() {
+        return atk;
+    }
+    
+    public Personaggio(String nome, int[] pos, int atk, int def, int hp, int maxHp, double range) {
+        this.nome = nome;
+        this.pos = pos;
+        this.atk = atk;
+        this.def = def;
+        this.hp = hp;
+        this.maxHp = maxHp;
+        this.range = range;
     }
     public int attacco(Personaggio nemico){
-        int danno = atk*4-nemico.def;
-        if (nemico.isVivo()){
-            if(danno<=0){
-                danno=1;
-            }
-            nemico.hp-=danno;
+        int danno=atk*3-nemico.getDef()*2;
+        if(danno<=0){
+            danno=1;
         }
         return danno;
     }
+    public void movimento(int x, int y){
+        pos[0]+=x;
+        pos[1]+=y;
+    }
+    private boolean isVivo(){
+        boolean vivo=false;
+        if(hp>0){
+            vivo=true;
+        }
+        return vivo;
+    }
+    public boolean subisciDanno(int danno){
+        hp-=danno;
+        return isVivo();
+    }
+
+    @Override
+    public String toString() {
+        return "Personaggio{" + "nome=" + nome + ", pos=" + pos[0] +";"+pos[1]+ ", atk=" + atk + ", def=" + def + ", hp=" + hp + ", maxHp=" + maxHp + ", range=" + range + '}';
+    }
+    
+    
 }
+
